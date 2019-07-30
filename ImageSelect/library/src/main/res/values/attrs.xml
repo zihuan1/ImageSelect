@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ZHSelectSelectImageView">
+        <attr name="max_num" format="integer" />
+        <attr name="span_count" format="integer" />
+        <attr name="add_image" format="reference" />
+        <attr name="del_image" format="reference" />
+        <attr name="add_image_height" format="integer" />
+        <attr name="add_image_width" format="integer" />
+        <attr name="del_image_height" format="integer" />
+        <attr name="del_image_width" format="integer" />
+    </declare-styleable>
+</resources>

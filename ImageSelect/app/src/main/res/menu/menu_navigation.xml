@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/i_menu1"
+        android:checked="true"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/app_name" />
+
+    <item
+        android:id="@+id/i_menu2"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/app_name" />
+
+    <item
+        android:id="@+id/i_menu3"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/app_name" />
+    <item
+        android:id="@+id/i_menu4"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/app_name" />
+</menu>

@@ -1,0 +1,9 @@
+.gradle
+.idea
+app/build
+build
+*.iml
+local.properties
+app/debug.jks
+app/release/output.json
+*.apk
