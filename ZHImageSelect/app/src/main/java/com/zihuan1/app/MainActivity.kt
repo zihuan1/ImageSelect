@@ -27,8 +27,6 @@ class MainActivity : Activity() {
                     zh_view.setData(Matisse.obtainPathResult(data))
                 }
             }
-
     }
-
 }
 
