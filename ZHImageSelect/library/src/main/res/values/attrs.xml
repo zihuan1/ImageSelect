@@ -3,11 +3,12 @@
     <declare-styleable name="SelectPicture">
         <attr name="max_num" format="integer" />
         <attr name="span_count" format="integer" />
-        <attr name="add_image" format="reference" />
         <attr name="del_image" format="reference" />
-        <attr name="add_image_height" format="integer" />
-        <attr name="add_image_width" format="integer" />
         <attr name="del_image_height" format="integer" />
         <attr name="del_image_width" format="integer" />
+        <attr name="item_image" format="reference" />
+        <attr name="image_height" format="integer" />
+        <attr name="image_width" format="integer" />
+
     </declare-styleable>
 </resources>

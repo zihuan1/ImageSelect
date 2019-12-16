@@ -6,7 +6,7 @@
 
     <com.zihuan1.selectpicture.SelectPictureView
         android:id="@+id/zh_view"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:add_image_height="85"
         app:add_image_width="85"

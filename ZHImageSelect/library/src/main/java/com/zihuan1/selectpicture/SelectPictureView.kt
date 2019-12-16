@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zihuan.selectpicture.R
 import java.util.*
@@ -38,23 +39,22 @@ class SelectPictureView : FrameLayout, SelectPictureListener {
             val delImg = attributes.getResourceId(R.styleable.SelectPicture_del_image, 0)
             val delImgHeight = attributes.getInteger(R.styleable.SelectPicture_del_image_height, 0)
             val delImgWidth = attributes.getInteger(R.styleable.SelectPicture_del_image_width, 0)
-            val addImg = attributes.getResourceId(R.styleable.SelectPicture_add_image, 0)
-            val addImgHeight = attributes.getInteger(R.styleable.SelectPicture_add_image_height, 0)
-            val addImgWidth = attributes.getInteger(R.styleable.SelectPicture_add_image_width, 0)
+            val itemImg = attributes.getResourceId(R.styleable.SelectPicture_item_image, 0)
+            val imgHeight = attributes.getInteger(R.styleable.SelectPicture_image_height, 0)
+            val imgWidth = attributes.getInteger(R.styleable.SelectPicture_image_width, 0)
             mSpanCount = attributes.getInteger(R.styleable.SelectPicture_span_count, 4)
 
             setDelImgHeight(delImgHeight)
             setDelImgWidth(delImgWidth)
-            setAddImgHeight(addImgHeight)
-            setAddImgWidth(addImgWidth)
+            setAddImgHeight(imgHeight)
+            setAddImgWidth(imgWidth)
             setDeleteImage(delImg)
-            setAddImage(addImg)
+            setAddImage(itemImg)
             setMaxNum(mMAxNum)
         }
-        //    左边距有问题
-        val manager = FullyGridLayoutManager(mContext, mSpanCount)
-        recyclerView.layoutManager = manager
+        recyclerView.layoutManager = GridLayoutManager(mContext, mSpanCount)
         recyclerView.adapter = mGridImageAdapter
+//        recyclerView.addItemDecoration(SpaceItemDecoration(dip2px(5f), mSpanCount))
 
     }
 
