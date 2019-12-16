@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="ZHSelectSelectImageView">
+    <declare-styleable name="SelectPicture">
         <attr name="max_num" format="integer" />
         <attr name="span_count" format="integer" />
         <attr name="add_image" format="reference" />

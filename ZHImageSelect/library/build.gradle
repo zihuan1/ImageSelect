@@ -1,17 +1,14 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 26
-
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 26
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -20,14 +17,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+//    https://deskid.github.io/2019/03/05/about-kotlin-module/
+    compileOptions {
+        kotlinOptions.freeCompilerArgs += ['-module-name', "com.zihuan.selectpicture"]
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api 'com.android.support:appcompat-v7:26.0.1'
-    api 'com.android.support:recyclerview-v7:26.0.1'
-    api 'com.github.bumptech.glide:glide:4.9.0'
-    api 'com.github.zihuan1:RecyclerAdapter:1.1'
-    api 'com.zhihu.android:matisse:0.5.2-beta3'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

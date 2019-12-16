@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.zihuan1.selectimage.ZHSelectSelectImageView
+    <com.zihuan1.selectpicture.SelectPictureView
         android:id="@+id/zh_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:add_image_height="85"
         app:add_image_width="85"
         app:del_image="@mipmap/ic_del_bt"
-        app:max_num="9" />
-
+        app:max_num="9"
+        app:span_count="3" />
 
 </RelativeLayout>
