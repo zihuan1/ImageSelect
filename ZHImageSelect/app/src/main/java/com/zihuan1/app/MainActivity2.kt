@@ -24,7 +24,7 @@ import com.zihuan1.selectpicture.PictureLoaderListener
 import com.zihuan1.selectpicture.SelectPictureView.Companion.IMAGE_REQUEST_CODE
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : Activity(), PictureItemListener, PictureLoaderListener {
+class MainActivity2 : Activity(), PictureItemListener, PictureLoaderListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,25 +36,7 @@ class MainActivity : Activity(), PictureItemListener, PictureLoaderListener {
         } else {
             Toast.makeText(this, "您已经申请了权限!", Toast.LENGTH_SHORT).show()
         }
-        bt_1.setOnClickListener {
-            startActivity(Intent(this, MainActivity2::class.java))
-        }
-        GridImageAdapter.addImageClickFun = {
-            Matisse.from(it.context as Activity)
-                    .choose(MimeType.of(MimeType.JPEG, MimeType.PNG))
-                    .countable(true)
-                    .maxSelectable(it.mMAxNum - it.mImages.size)
-                    .gridExpectedSize(300)
-                    .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-                    .thumbnailScale(0.85f)
-                    .imageEngine(GlideEngineHeight()) //                    .originalEnable(true)//是否显示原图
-                    .capture(true) //是否提供拍照功能
-                    .captureStrategy(CaptureStrategy(true, "com.zihuan.selectimage"))
-                    .spanCount(5)
-                    .forResult(IMAGE_REQUEST_CODE)
-        }
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

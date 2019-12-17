@@ -9,12 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zihuan.selectpicture.R
 import java.util.*
 
-class SelectPictureView : FrameLayout, SelectPictureListener {
-    lateinit var mGridImageAdapter: GridImageAdapter
+class SelectPictureView : FrameLayout {
+    private lateinit var mGridImageAdapter: GridImageAdapter
+    private lateinit var mContext: Context
     var mSpanCount = 4 //列数
     var mMAxNum = 9
-    private var mImages = ArrayList<String>()
-    private lateinit var mContext: Context
+    var mImages = ArrayList<String>()
 
     constructor(context: Context) : super(context) {
         initView(null)
@@ -32,7 +32,7 @@ class SelectPictureView : FrameLayout, SelectPictureListener {
         mContext = context
         val view = View.inflate(mContext, R.layout.zh_selectimage_view, this)
         val recyclerView: RecyclerView = view.findViewById(R.id.rv_select_image)
-        mGridImageAdapter = GridImageAdapter(mContext)
+        mGridImageAdapter = GridImageAdapter(mContext, this)
         if (null != attrs) {
             val attributes = context.obtainStyledAttributes(attrs, R.styleable.SelectPicture)
             mMAxNum = attributes.getInteger(R.styleable.SelectPicture_max_num, 0)
@@ -60,6 +60,11 @@ class SelectPictureView : FrameLayout, SelectPictureListener {
         recyclerView.adapter = mGridImageAdapter
         recyclerView.addItemDecoration(MediaGridInset(mSpanCount, dip2px(4), false))
     }
+
+    /**
+     * 点击的是否是加号图片
+     */
+    fun isClickAddImage(position: Int) = mGridImageAdapter.isShowAddItem(position)
 
     /**
      * 设置圆角半径
@@ -117,16 +122,6 @@ class SelectPictureView : FrameLayout, SelectPictureListener {
         return this
     }
 
-
-    override fun onAddImagesListener(paths: List<String>) {
-
-    }
-
-    override fun onDeleteListener(path: String) {
-        if (mImages.contains(path)) {
-            mImages.remove(path)
-        }
-    }
 
     companion object {
         var IMAGE_REQUEST_CODE = 10086

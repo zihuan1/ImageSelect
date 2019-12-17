@@ -1,5 +1,6 @@
 package com.zihuan1.selectpicture
 
+import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +18,7 @@ import java.util.*
  *
  * @author Zihuan
  */
-class GridImageAdapter(`object`: Context?) : RecyclerView.Adapter<MyViewHolder>() {
+class GridImageAdapter(`object`: Context?, private val selectPictureView: SelectPictureView) : RecyclerView.Adapter<MyViewHolder>() {
     private var selectMax = 9
     private var selectPictureListener: SelectPictureListener? = null
     private var pictureItemListener: PictureItemListener? = null
@@ -71,7 +72,13 @@ class GridImageAdapter(`object`: Context?) : RecyclerView.Adapter<MyViewHolder>(
             del_params.width = mDelResWidth
             iv_del.layoutParams = del_params
         }
-        imageView.setOnClickListener { pictureItemListener?.onSelectPictureItem(holder.itemView, position) }
+//        点击当前图片
+        imageView.setOnClickListener {
+            if (isShowAddItem(position)) {
+                addImageClickFun?.invoke(selectPictureView)
+            }
+            pictureItemListener?.onSelectPictureItem(holder.itemView, position, isShowAddItem(position))
+        }
         //少于8张，显示继续添加的图标
         if (getItemViewType(position) == TYPE_CAMERA) {
             imageView.setImageResource(if (mAddRes == 0) R.drawable.addimg_1x else mAddRes)
@@ -141,7 +148,7 @@ class GridImageAdapter(`object`: Context?) : RecyclerView.Adapter<MyViewHolder>(
     }
 
     fun isShowAddItem(position: Int): Boolean {
-        val size = if (baseData.size == 0) 0 else baseData.size
+        val size = if (baseData.isEmpty()) 0 else baseData.size
         return position == size
     }
 
@@ -150,5 +157,10 @@ class GridImageAdapter(`object`: Context?) : RecyclerView.Adapter<MyViewHolder>(
         var iv_del: ImageView = itemView.findViewById(R.id.iv_del)
     }
 
-
+    companion object {
+        /**
+         * 添加点击加号图片的动作
+         */
+        var addImageClickFun: ((pictureView: SelectPictureView) -> Unit)? = null
+    }
 }
