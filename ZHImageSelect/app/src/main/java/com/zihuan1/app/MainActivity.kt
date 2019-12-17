@@ -14,7 +14,6 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.internal.entity.CaptureStrategy
@@ -57,7 +56,7 @@ class MainActivity : Activity(), PictureItemListener, PictureLoaderListener {
                     .gridExpectedSize(300)
                     .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
                     .thumbnailScale(0.85f)
-                    .imageEngine(com.zihuan1.app.GlideEngineHeight()) //                    .originalEnable(true)//是否显示原图
+                    .imageEngine(GlideEngineHeight()) //                    .originalEnable(true)//是否显示原图
                     .capture(true) //是否提供拍照功能
                     .captureStrategy(CaptureStrategy(true, "com.zihuan.selectimage"))
                     .spanCount(5)
