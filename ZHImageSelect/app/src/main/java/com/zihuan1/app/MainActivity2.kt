@@ -4,27 +4,20 @@ package com.zihuan1.app
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
 import com.zhihu.matisse.Matisse
-import com.zhihu.matisse.MimeType
-import com.zhihu.matisse.internal.entity.CaptureStrategy
 import com.zihuan.app.R
-import com.zihuan1.selectpicture.GridImageAdapter
-import com.zihuan1.selectpicture.PictureItemListener
-import com.zihuan1.selectpicture.PictureLoaderListener
+import com.zihuan1.selectpicture.PictureItemClickListener
 import com.zihuan1.selectpicture.SelectPictureView.Companion.IMAGE_REQUEST_CODE
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity2 : Activity(), PictureItemListener, PictureLoaderListener {
+class MainActivity2 : Activity(), PictureItemClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,13 +41,6 @@ class MainActivity2 : Activity(), PictureItemListener, PictureLoaderListener {
             }
     }
 
-
-    override fun onSelectPictureLoader(view: ImageView, url: String) {
-        Glide.with(this)
-                .asBitmap()
-                .load(url)
-                .into(view)
-    }
 
     override fun onSelectPictureItem(view: View?, position: Int, isClickAdd: Boolean) {
         if (isClickAdd) {

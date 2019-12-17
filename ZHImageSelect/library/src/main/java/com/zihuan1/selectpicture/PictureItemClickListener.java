@@ -2,7 +2,7 @@ package com.zihuan1.selectpicture;
 
 import android.view.View;
 
-public interface PictureItemListener {
+public interface PictureItemClickListener {
     /**
      * @param view     当前Item
      * @param position 当前点击位置

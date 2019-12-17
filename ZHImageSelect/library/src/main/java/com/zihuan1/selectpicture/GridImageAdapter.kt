@@ -1,6 +1,5 @@
 package com.zihuan1.selectpicture
 
-import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -21,12 +20,10 @@ import java.util.*
 class GridImageAdapter(`object`: Context?, private val selectPictureView: SelectPictureView) : RecyclerView.Adapter<MyViewHolder>() {
     private var selectMax = 9
     private var selectPictureListener: SelectPictureListener? = null
-    private var pictureItemListener: PictureItemListener? = null
-    private var pictureLoaderListener: PictureLoaderListener? = null
-
+    private var pictureItemClickListener: PictureItemClickListener? = null
     private val TYPE_CAMERA = 1
     private val TYPE_PICTURE = 2
-    var baseData = ArrayList<String>()
+    private var baseData = ArrayList<String>()
     private var topLeft = 0f
     private var topRight = 0f
     private var bottomLeft = 0f
@@ -40,8 +37,7 @@ class GridImageAdapter(`object`: Context?, private val selectPictureView: Select
 
     init {
         if (`object` is SelectPictureListener) selectPictureListener = `object`
-        if (`object` is PictureItemListener) pictureItemListener = `object`
-        if (`object` is PictureLoaderListener) pictureLoaderListener = `object`
+        if (`object` is PictureItemClickListener) pictureItemClickListener = `object`
     }
 
 
@@ -59,37 +55,37 @@ class GridImageAdapter(`object`: Context?, private val selectPictureView: Select
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val imageView = holder.iv_picture
-        val iv_del = holder.iv_del
+        val imageView = holder.ivPicture
+        val ivDel = holder.ivDel
         val params = imageView.layoutParams
         params.height = mAddImgHeight
         params.width = mAddImgWidth
         imageView.layoutParams = params
         imageView.setCornerRadius(topLeft, topRight, bottomLeft, bottomRight)
         if (mDelResWidth != 0 && mDelResHeight != 0) {
-            val del_params = iv_del.layoutParams
-            del_params.height = mDelResHeight
-            del_params.width = mDelResWidth
-            iv_del.layoutParams = del_params
+            val delParams = ivDel.layoutParams
+            delParams.height = mDelResHeight
+            delParams.width = mDelResWidth
+            ivDel.layoutParams = delParams
         }
 //        点击当前图片
         imageView.setOnClickListener {
             if (isShowAddItem(position)) {
                 addImageClickFun?.invoke(selectPictureView)
             }
-            pictureItemListener?.onSelectPictureItem(holder.itemView, position, isShowAddItem(position))
+            pictureItemClickListener?.onSelectPictureItem(holder.itemView, position, isShowAddItem(position))
         }
         //少于8张，显示继续添加的图标
         if (getItemViewType(position) == TYPE_CAMERA) {
             imageView.setImageResource(if (mAddRes == 0) R.drawable.addimg_1x else mAddRes)
-            iv_del.visibility = View.GONE
+            ivDel.visibility = View.GONE
         } else {
-            pictureLoaderListener?.onSelectPictureLoader(imageView, baseData[position])
+            loaderImage?.invoke(imageView, baseData[position])
             if (mDelRes != 0) {
-                iv_del.setImageResource(mDelRes)
+                ivDel.setImageResource(mDelRes)
             }
-            iv_del.visibility = View.VISIBLE
-            iv_del.setOnClickListener {
+            ivDel.visibility = View.VISIBLE
+            ivDel.setOnClickListener {
                 selectPictureListener?.onDeleteListener(baseData[position])
                 baseData.removeAt(position)
                 notifyItemRemoved(position)
@@ -153,14 +149,19 @@ class GridImageAdapter(`object`: Context?, private val selectPictureView: Select
     }
 
     inner class MyViewHolder(itemView: View) : ViewHolder(itemView) {
-        var iv_picture: RoundedImageView = itemView.findViewById(R.id.iv_picture)
-        var iv_del: ImageView = itemView.findViewById(R.id.iv_del)
+        var ivPicture: RoundedImageView = itemView.findViewById(R.id.iv_picture)
+        var ivDel: ImageView = itemView.findViewById(R.id.iv_del)
     }
 
     companion object {
         /**
-         * 添加点击加号图片的动作
+         * 配置添加点击加号图片的动作
          */
         var addImageClickFun: ((pictureView: SelectPictureView) -> Unit)? = null
+
+        /**
+         * 配置图片加载方式
+         */
+        var loaderImage: ((view: RoundedImageView, url: String) -> Unit)? = null
     }
 }
