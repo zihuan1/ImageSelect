@@ -60,6 +60,7 @@ class MainActivity : Activity(), PictureItemListener, PictureLoaderListener {
                     .imageEngine(com.zihuan1.app.GlideEngineHeight()) //                    .originalEnable(true)//是否显示原图
                     .capture(true) //是否提供拍照功能
                     .captureStrategy(CaptureStrategy(true, "com.zihuan.selectimage"))
+                    .spanCount(5)
                     .forResult(IMAGE_REQUEST_CODE)
         } else {
             Log.e("图片详情", "")

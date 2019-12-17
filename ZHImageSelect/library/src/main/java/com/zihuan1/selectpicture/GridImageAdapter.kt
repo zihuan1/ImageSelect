@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.makeramen.roundedimageview.RoundedImageView
 import com.zihuan.selectpicture.R
 import com.zihuan1.selectpicture.GridImageAdapter.MyViewHolder
 import java.util.*
@@ -25,7 +26,10 @@ class GridImageAdapter(`object`: Context?) : RecyclerView.Adapter<MyViewHolder>(
     private val TYPE_CAMERA = 1
     private val TYPE_PICTURE = 2
     var baseData = ArrayList<String>()
-
+    private var topLeft = 0f
+    private var topRight = 0f
+    private var bottomLeft = 0f
+    private var bottomRight = 0f
     private var mDelRes = 0
     private var mAddRes = 0
     private var mAddImgHeight = 160
@@ -60,6 +64,7 @@ class GridImageAdapter(`object`: Context?) : RecyclerView.Adapter<MyViewHolder>(
         params.height = mAddImgHeight
         params.width = mAddImgWidth
         imageView.layoutParams = params
+        imageView.setCornerRadius(topLeft, topRight, bottomLeft, bottomRight)
         if (mDelResWidth != 0 && mDelResHeight != 0) {
             val del_params = iv_del.layoutParams
             del_params.height = mDelResHeight
@@ -100,11 +105,11 @@ class GridImageAdapter(`object`: Context?) : RecyclerView.Adapter<MyViewHolder>(
         this.selectMax = selectMax
     }
 
-    fun setAddImageHeight(height: Int) {
+    fun setItemImageHeight(height: Int) {
         mAddImgHeight = height
     }
 
-    fun setAddImageWidth(width: Int) {
+    fun setItemImageWidth(width: Int) {
         mAddImgWidth = width
     }
 
@@ -116,12 +121,23 @@ class GridImageAdapter(`object`: Context?) : RecyclerView.Adapter<MyViewHolder>(
         mDelResWidth = width
     }
 
-    fun setAddImage(addImage: Int) {
+    fun setItemImage(addImage: Int) {
         mAddRes = addImage
     }
 
     fun setDelImage(delImage: Int) {
         mDelRes = delImage
+    }
+
+
+    /**
+     * 设置圆角半径
+     */
+    fun setCornerRadius(tLeft: Float, tRight: Float, bLeft: Float, bRight: Float) {
+        topLeft = tLeft
+        topRight = tRight
+        bottomLeft = bLeft
+        bottomRight = bRight
     }
 
     fun isShowAddItem(position: Int): Boolean {
@@ -130,7 +146,7 @@ class GridImageAdapter(`object`: Context?) : RecyclerView.Adapter<MyViewHolder>(
     }
 
     inner class MyViewHolder(itemView: View) : ViewHolder(itemView) {
-        var iv_picture: ImageView = itemView.findViewById(R.id.iv_picture)
+        var iv_picture: RoundedImageView = itemView.findViewById(R.id.iv_picture)
         var iv_del: ImageView = itemView.findViewById(R.id.iv_del)
     }
 

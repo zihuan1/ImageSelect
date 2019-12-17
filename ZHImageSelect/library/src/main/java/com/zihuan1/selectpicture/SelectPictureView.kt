@@ -40,46 +40,57 @@ class SelectPictureView : FrameLayout, SelectPictureListener {
             val delImgHeight = attributes.getInteger(R.styleable.SelectPicture_del_image_height, 0)
             val delImgWidth = attributes.getInteger(R.styleable.SelectPicture_del_image_width, 0)
             val itemImg = attributes.getResourceId(R.styleable.SelectPicture_item_image, 0)
-            val imgHeight = attributes.getInteger(R.styleable.SelectPicture_image_height, 0)
-            val imgWidth = attributes.getInteger(R.styleable.SelectPicture_image_width, 0)
-            mSpanCount = attributes.getInteger(R.styleable.SelectPicture_span_count, 4)
-
+            val imgHeight = attributes.getInteger(R.styleable.SelectPicture_item_image_height, 0)
+            val imgWidth = attributes.getInteger(R.styleable.SelectPicture_item_image_width, 0)
+            mSpanCount = attributes.getInteger(R.styleable.SelectPicture_span_count, 3)
+            val tLeft = attributes.getInteger(R.styleable.SelectPicture_radius_top_left, 0)
+            val tRight = attributes.getInteger(R.styleable.SelectPicture_radius_top_right, 0)
+            val bLeft = attributes.getInteger(R.styleable.SelectPicture_radius_bottom_left, 0)
+            val bRight = attributes.getInteger(R.styleable.SelectPicture_radius_bottom_right, 0)
+            setCornerRadius(dip2px(tLeft), dip2px(tRight), dip2px(bLeft), dip2px(bRight))
+            setItemImage(itemImg)
+            setItemImgHeight(imgHeight)
+            setItemImgWidth(imgWidth)
             setDelImgHeight(delImgHeight)
             setDelImgWidth(delImgWidth)
-            setAddImgHeight(imgHeight)
-            setAddImgWidth(imgWidth)
             setDeleteImage(delImg)
-            setAddImage(itemImg)
             setMaxNum(mMAxNum)
         }
         recyclerView.layoutManager = GridLayoutManager(mContext, mSpanCount)
         recyclerView.adapter = mGridImageAdapter
-//        recyclerView.addItemDecoration(SpaceItemDecoration(dip2px(5f), mSpanCount))
-
+        recyclerView.addItemDecoration(MediaGridInset(mSpanCount, dip2px(4), false))
     }
 
-    fun setAddImgHeight(height: Int): SelectPictureView {
-        mGridImageAdapter.setAddImageHeight(dip2px(height.toFloat()))
+    /**
+     * 设置圆角半径
+     */
+    fun setCornerRadius(tLeft: Int, tRight: Int, bLeft: Int, bRight: Int): SelectPictureView {
+        mGridImageAdapter.setCornerRadius(tLeft.toFloat(), tRight.toFloat(), bLeft.toFloat(), bRight.toFloat())
         return this
     }
 
-    fun setAddImgWidth(width: Int): SelectPictureView {
-        mGridImageAdapter.setAddImageWidth(dip2px(width.toFloat()))
+    fun setItemImgHeight(height: Int): SelectPictureView {
+        mGridImageAdapter.setItemImageHeight(dip2px(height))
         return this
     }
 
-    fun setAddImage(delImg: Int): SelectPictureView {
-        mGridImageAdapter.setAddImage(delImg)
+    fun setItemImgWidth(width: Int): SelectPictureView {
+        mGridImageAdapter.setItemImageWidth(dip2px(width))
+        return this
+    }
+
+    fun setItemImage(itemImg: Int): SelectPictureView {
+        mGridImageAdapter.setItemImage(itemImg)
         return this
     }
 
     fun setDelImgHeight(height: Int): SelectPictureView {
-        mGridImageAdapter.setDelImageHeight(dip2px(height.toFloat()))
+        mGridImageAdapter.setDelImageHeight(dip2px(height))
         return this
     }
 
     fun setDelImgWidth(width: Int): SelectPictureView {
-        mGridImageAdapter.setDelImageWidth(dip2px(width.toFloat()))
+        mGridImageAdapter.setDelImageWidth(dip2px(width))
         return this
     }
 
@@ -121,9 +132,6 @@ class SelectPictureView : FrameLayout, SelectPictureListener {
         var IMAGE_REQUEST_CODE = 10086
     }
 
-    private fun dip2px(dpValue: Float): Int {
-        val scale = mContext.resources.displayMetrics.density
-        return (dpValue * scale + 0.5f).toInt()
-    }
+    private fun dip2px(dpValue: Int) = (dpValue * resources.displayMetrics.density).toInt()
 
 }
