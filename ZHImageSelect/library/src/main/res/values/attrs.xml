@@ -9,6 +9,10 @@
         <attr name="item_image" format="reference" />
         <attr name="item_image_height" format="integer" />
         <attr name="item_image_width" format="integer" />
+        <!--边距-->
+        <attr name="margin" format="integer" />
+        <!-- 删除按钮位置-->
+        <attr name="del_position" format="integer" />
 
         <attr name="radius_top_left" format="integer" />
         <attr name="radius_top_right" format="integer" />

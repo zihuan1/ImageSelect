@@ -19,6 +19,7 @@
         app:del_image="@mipmap/ic_del_bt"
         app:item_image_height="66"
         app:item_image_width="94"
+        app:margin="15"
         app:max_num="9"
         app:radius_bottom_left="10"
         app:radius_bottom_right="10"

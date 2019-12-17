@@ -50,7 +50,7 @@ class GridImageAdapter(`object`: Context?, private val selectPictureView: Select
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.zh_rv_image, parent, false)
+        val view = View.inflate(parent.context, R.layout.zh_rv_image, null)
         return MyViewHolder(view)
     }
 

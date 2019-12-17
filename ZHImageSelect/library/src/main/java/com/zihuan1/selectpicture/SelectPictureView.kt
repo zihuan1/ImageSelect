@@ -12,6 +12,7 @@ import java.util.*
 class SelectPictureView : FrameLayout {
     private lateinit var mGridImageAdapter: GridImageAdapter
     private lateinit var mContext: Context
+    private var margin = 0
     var mSpanCount = 4 //列数
     var mMAxNum = 9
     var mImages = ArrayList<String>()
@@ -42,6 +43,7 @@ class SelectPictureView : FrameLayout {
             val itemImg = attributes.getResourceId(R.styleable.SelectPicture_item_image, 0)
             val imgHeight = attributes.getInteger(R.styleable.SelectPicture_item_image_height, 0)
             val imgWidth = attributes.getInteger(R.styleable.SelectPicture_item_image_width, 0)
+            margin = attributes.getInteger(R.styleable.SelectPicture_margin, 0)
             mSpanCount = attributes.getInteger(R.styleable.SelectPicture_span_count, 3)
             val tLeft = attributes.getInteger(R.styleable.SelectPicture_radius_top_left, 0)
             val tRight = attributes.getInteger(R.styleable.SelectPicture_radius_top_right, 0)
@@ -58,7 +60,7 @@ class SelectPictureView : FrameLayout {
         }
         recyclerView.layoutManager = GridLayoutManager(mContext, mSpanCount)
         recyclerView.adapter = mGridImageAdapter
-        recyclerView.addItemDecoration(MediaGridInset(mSpanCount, dip2px(4), false))
+        recyclerView.addItemDecoration(MediaGridInset(mSpanCount, dip2px(margin), false))
     }
 
     /**
