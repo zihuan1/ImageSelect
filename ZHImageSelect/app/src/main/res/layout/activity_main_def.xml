@@ -9,22 +9,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.zihuan1.selectpicture.SelectPictureView
+    <com.zihuan.selectpicture.SelectPictureView
         android:id="@+id/zh_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bt_1"
         android:layout_marginLeft="42dp"
         android:layout_marginRight="10dp"
-        app:del_image="@mipmap/ic_del_bt"
-        app:item_image_height="66"
-        app:item_image_width="94"
+        app:default_adapter="true"
         app:margin="15"
         app:max_num="9"
-        app:radius_bottom_left="10"
-        app:radius_bottom_right="10"
-        app:radius_top_left="0"
-        app:radius_top_right="10"
         app:span_count="3" />
 
 </RelativeLayout>

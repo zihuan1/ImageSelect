@@ -3,17 +3,17 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-
     <ImageView
-        android:id="@+id/iv_picture"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:id="@+id/iv_picture2"
+        android:layout_width="92dp"
+        android:layout_height="62dp"
         android:layout_centerInParent="true"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="18dp"
         android:scaleType="centerCrop" />
 
-
     <ImageView
-        android:id="@+id/iv_del"
+        android:id="@+id/iv_del2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/iv_picture"

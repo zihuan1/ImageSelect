@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="SelectPicture">
+        <!--最大数-->
         <attr name="max_num" format="integer" />
+        <!--列数-->
         <attr name="span_count" format="integer" />
+        <!--删除按钮-->
         <attr name="del_image" format="reference" />
-        <attr name="del_image_height" format="integer" />
-        <attr name="del_image_width" format="integer" />
+        <!--添加按钮-->
         <attr name="item_image" format="reference" />
-        <attr name="item_image_height" format="integer" />
-        <attr name="item_image_width" format="integer" />
         <!--边距-->
         <attr name="margin" format="integer" />
-        <!-- 删除按钮位置-->
-        <attr name="del_position" format="integer" />
-        <!-- 删除按钮偏移量 删除按钮中心点对齐图片左上角-->
-        <attr name="del_position_offset" format="boolean" />
+        <!--是否启用默认的适配器 默认启用-->
+        <attr name="default_adapter" format="boolean" />
+
+        <attr name="del_image_height" format="integer" />
+        <attr name="del_image_width" format="integer" />
+        <attr name="item_image_height" format="integer" />
+        <attr name="item_image_width" format="integer" />
+
         <attr name="radius_top_left" format="integer" />
         <attr name="radius_top_right" format="integer" />
         <attr name="radius_bottom_left" format="integer" />

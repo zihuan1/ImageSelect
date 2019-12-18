@@ -1,4 +1,4 @@
-package com.zihuan1.selectpicture
+package com.zihuan.selectpicture
 
 import android.graphics.Rect
 import android.util.Log

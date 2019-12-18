@@ -13,21 +13,25 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.zhihu.matisse.Matisse
 import com.zihuan.app.R
-import com.zihuan1.selectpicture.PictureItemClickListener
-import com.zihuan1.selectpicture.SelectPictureView.Companion.IMAGE_REQUEST_CODE
-import kotlinx.android.synthetic.main.activity_main.*
+import com.zihuan.selectpicture.PictureItemClickListener
+import com.zihuan.selectpicture.SelectPictureView.Companion.IMAGE_REQUEST_CODE
+import kotlinx.android.synthetic.main.activity_main_def.*
 
-class MainActivity2 : Activity(), PictureItemClickListener {
+/**
+ * 默认适配器
+ */
+class DefMainActivity : Activity(), PictureItemClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-//        zh_view.setMaxNum(9)
-//                .setSpanCount(4)
+        setContentView(R.layout.activity_main_def)
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
         } else {
             Toast.makeText(this, "您已经申请了权限!", Toast.LENGTH_SHORT).show()
+        }
+        bt_1.setOnClickListener {
+            startActivity(Intent(this, CustomMainActivity::class.java))
         }
     }
 
