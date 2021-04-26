@@ -36,6 +36,7 @@ class SelectPictureView : FrameLayout {
 
     lateinit var recyclerView: RecyclerView
     private fun initView(attrs: AttributeSet?) {
+        TODO("合并到BaseRecyclerViewAdapter 中")
         mContext = context
         val view = View.inflate(mContext, R.layout.zh_selectimage_view, this)
         recyclerView = view.findViewById(R.id.rv_select_image)

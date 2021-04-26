@@ -14,8 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bt_1"
-        android:layout_marginLeft="42dp"
-        android:layout_marginRight="10dp"
         app:default_adapter="true"
         app:margin="15"
         app:max_num="9"
