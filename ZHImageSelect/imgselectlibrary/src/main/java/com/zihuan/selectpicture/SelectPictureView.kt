@@ -10,33 +10,21 @@ import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 
 class SelectPictureView : FrameLayout {
-    private var delImgHeight = 0
-    private var delImgWidth = 0
     private var delImg = 0
     private var itemImg = 0
-    private var imgHeight = 0
-    private var imgWidth = 0
     private lateinit var mGridImageAdapter: BasePictureAdapter
     lateinit var mContext: Context
     private var margin = 0
     var mSpanCount = 4 //列数
     var mMAxNum = 9
 
-    constructor(context: Context) : super(context) {
-        initView(null)
-    }
-
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+    @JvmOverloads
+    constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : super(context, attrs, defStyleAttr) {
         initView(attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        initView(attrs)
-    }
-
-    lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerView: RecyclerView
     private fun initView(attrs: AttributeSet?) {
-        TODO("合并到BaseRecyclerViewAdapter 中")
         mContext = context
         val view = View.inflate(mContext, R.layout.zh_selectimage_view, this)
         recyclerView = view.findViewById(R.id.rv_select_image)
@@ -44,11 +32,7 @@ class SelectPictureView : FrameLayout {
             val attributes = context.obtainStyledAttributes(attrs, R.styleable.SelectPicture)
             mMAxNum = attributes.getInteger(R.styleable.SelectPicture_max_num, 0)
             delImg = attributes.getResourceId(R.styleable.SelectPicture_del_image, 0)
-            delImgHeight = attributes.getInteger(R.styleable.SelectPicture_del_image_height, 0)
-            delImgWidth = attributes.getInteger(R.styleable.SelectPicture_del_image_width, 0)
             itemImg = attributes.getResourceId(R.styleable.SelectPicture_item_image, 0)
-            imgHeight = attributes.getInteger(R.styleable.SelectPicture_item_image_height, 0)
-            imgWidth = attributes.getInteger(R.styleable.SelectPicture_item_image_width, 0)
             margin = attributes.getInteger(R.styleable.SelectPicture_margin, 0)
             mSpanCount = attributes.getInteger(R.styleable.SelectPicture_span_count, 3)
             val adapter = attributes.getBoolean(R.styleable.SelectPicture_default_adapter, false)
@@ -66,12 +50,8 @@ class SelectPictureView : FrameLayout {
         mGridImageAdapter = adapterPicture
         recyclerView.layoutManager = GridLayoutManager(mContext, mSpanCount)
         recyclerView.adapter = mGridImageAdapter
-        recyclerView.addItemDecoration(MediaGridInset(mSpanCount, dip2px(margin), false))
+        recyclerView.addItemDecoration(MediaGridInset(mSpanCount, margin, false))
         setItemImage(itemImg)
-        setItemImgHeight(imgHeight)
-        setItemImgWidth(imgWidth)
-        setDelImgHeight(delImgHeight)
-        setDelImgWidth(delImgWidth)
         setDeleteImage(delImg)
         setMaxNum(mMAxNum)
     }
@@ -81,29 +61,8 @@ class SelectPictureView : FrameLayout {
      */
     fun isClickAddImage(position: Int) = mGridImageAdapter.isShowAddItem(position)
 
-
-    fun setItemImgHeight(height: Int): SelectPictureView {
-        mGridImageAdapter.mAddImgHeight = dip2px(height)
-        return this
-    }
-
-    fun setItemImgWidth(width: Int): SelectPictureView {
-        mGridImageAdapter.mAddImgWidth = dip2px(width)
-        return this
-    }
-
     fun setItemImage(itemImg: Int): SelectPictureView {
         mGridImageAdapter.mAddRes = itemImg
-        return this
-    }
-
-    fun setDelImgHeight(height: Int): SelectPictureView {
-        mGridImageAdapter.mDelResHeight = dip2px(height)
-        return this
-    }
-
-    fun setDelImgWidth(width: Int): SelectPictureView {
-        mGridImageAdapter.mDelResWidth = dip2px(width)
         return this
     }
 
@@ -132,7 +91,5 @@ class SelectPictureView : FrameLayout {
     companion object {
         var IMAGE_REQUEST_CODE = 10086
     }
-
-    private fun dip2px(dpValue: Int) = (dpValue * resources.displayMetrics.density).toInt()
 
 }

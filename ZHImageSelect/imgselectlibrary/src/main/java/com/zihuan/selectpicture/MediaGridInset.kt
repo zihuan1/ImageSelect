@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 class MediaGridInset(private val mSpanCount: Int, private val mSpacing: Int, private val mIncludeEdge: Boolean) : ItemDecoration() {
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        //            如果rv是充满布局的话,可能会出现右边距没有贴边的问题
+        //如果rv是充满布局的话,可能会出现右边距没有贴边的问题
         val position = parent.getChildAdapterPosition(view) // item position
         val column = position % mSpanCount // item column
 //        Log.e("列数", column.toString() + "")

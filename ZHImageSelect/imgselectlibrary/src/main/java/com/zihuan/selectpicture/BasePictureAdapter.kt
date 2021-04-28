@@ -21,10 +21,6 @@ abstract class BasePictureAdapter(val context: Context) : RecyclerView.Adapter<P
     var baseData = ArrayList<String>()
     var mDelRes = 0
     var mAddRes = 0
-    var mAddImgHeight = 160
-    var mAddImgWidth = 160
-    var mDelResHeight = 0
-    var mDelResWidth = 0
 
     init {
         if (context is SelectPictureListener) selectPictureListener = context
@@ -42,18 +38,6 @@ abstract class BasePictureAdapter(val context: Context) : RecyclerView.Adapter<P
     override fun onBindViewHolder(holder: PictureViewHolder, position: Int) {
         val imageView = holder.ivPicture
         val ivDel = holder.ivDel
-        if (mAddImgHeight != 0 && mAddImgHeight != 0) {
-            val params = imageView.layoutParams
-            params.height = mAddImgHeight
-            params.width = mAddImgWidth
-            imageView.layoutParams = params
-        }
-        if (mDelResWidth != 0 && mDelResHeight != 0) {
-            val delParams = ivDel.layoutParams
-            delParams.height = mDelResHeight
-            delParams.width = mDelResWidth
-            ivDel.layoutParams = delParams
-        }
 //        点击当前图片
         imageView.setOnClickListener {
             if (isShowAddItem(position)) {
