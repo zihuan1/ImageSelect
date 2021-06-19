@@ -58,8 +58,7 @@ abstract class BasePictureAdapter(val context: Context) : RecyclerView.Adapter<P
             ivDel.setOnClickListener {
                 selectPictureListener?.onDeleteListener(baseData[position])
                 baseData.removeAt(position)
-                notifyItemRemoved(position)
-                notifyItemRangeChanged(position, baseData.size)
+                notifyDataSetChanged()
             }
         }
     }
