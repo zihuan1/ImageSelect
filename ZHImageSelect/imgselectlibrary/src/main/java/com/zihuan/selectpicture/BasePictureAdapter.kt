@@ -79,6 +79,7 @@ abstract class BasePictureAdapter(val context: Context) : RecyclerView.Adapter<P
         return position == size
     }
 
+    //当前剩余最大可用数
     fun currentCount() = selectMax.minus(baseData.size)
 
     companion object {
